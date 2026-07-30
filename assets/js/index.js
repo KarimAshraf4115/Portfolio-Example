@@ -61,10 +61,7 @@ let isScrollingByClick = false;
 for (let i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("click", function () {
         isScrollingByClick = true;
-        for (let j = 0; j < navLinks.length; j++) {
-            navLinks[j].classList.remove("active")
-        }
-        navLinks[i].classList.add("active")
+
     })
 }
 
@@ -72,6 +69,11 @@ window.addEventListener("scroll", function () {
     if (isScrollingByClick) {
         return
     }
+
+})
+
+window.addEventListener("scrollend", function () {
+    isScrollingByClick = false;
     let currentSectionID = "";
     for (let j = 0; j < sections.length; j++) {
         let rect = sections[j].getBoundingClientRect();
@@ -85,10 +87,6 @@ window.addEventListener("scroll", function () {
             navLinks[k].classList.add("active");
         }
     }
-})
-
-window.addEventListener("scrollend", function () {
-    isScrollingByClick = false;
 })
 
 // SideBar functionalities
@@ -488,4 +486,22 @@ form.addEventListener("submit", (e) => {
     }
 })
 
+// go up button
+const scrollToTopBtn = document.getElementById("scroll-to-top");
 
+window.addEventListener("scroll", function () {
+    if (window.scrollY > 400) {
+        scrollToTopBtn.classList.remove("opacity-0", "invisible");
+        scrollToTopBtn.classList.add("opacity-100", "visible");
+    } else {
+        scrollToTopBtn.classList.add("opacity-0", "invisible");
+        scrollToTopBtn.classList.remove("opacity-100", "visible");
+    }
+});
+
+scrollToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
