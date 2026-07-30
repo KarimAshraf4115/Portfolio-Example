@@ -69,7 +69,18 @@ window.addEventListener("scroll", function () {
     if (isScrollingByClick) {
         return
     }
-
+        for (let j = 0; j < sections.length; j++) {
+        let rect = sections[j].getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom >= 100) {
+            currentSectionID = sections[j].getAttribute("id");
+        }
+    }
+    for (let k = 0; k < navLinks.length; k++) {
+        navLinks[k].classList.remove("active");
+        if ("#" + currentSectionID === navLinks[k].getAttribute("href")) {
+            navLinks[k].classList.add("active");
+        }
+    }
 })
 
 window.addEventListener("scrollend", function () {
