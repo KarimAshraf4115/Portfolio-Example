@@ -69,7 +69,7 @@ window.addEventListener("scroll", function () {
     if (isScrollingByClick) {
         return
     }
-        for (let j = 0; j < sections.length; j++) {
+    for (let j = 0; j < sections.length; j++) {
         let rect = sections[j].getBoundingClientRect();
         if (rect.top <= 100 && rect.bottom >= 100) {
             currentSectionID = sections[j].getAttribute("id");
@@ -370,6 +370,8 @@ customSelects.forEach((select) => {
         optionsList.classList.toggle("hidden");
         const isOpen = !optionsList.classList.contains("hidden");
         select.setAttribute("aria-expanded", isOpen);
+        const icon = select.querySelector("i");
+        icon.classList.toggle("rotate-180", isOpen);
     })
 
     options.forEach((option) => {
@@ -379,6 +381,7 @@ customSelects.forEach((select) => {
             selectedText.classList.add("text-slate-800", "dark:text-white");
             optionsList.classList.add("hidden");
             select.setAttribute("aria-expanded", false);
+            select.querySelector("i").classList.remove("rotate-180");
         })
     })
 })
@@ -453,6 +456,30 @@ let validateDetails = () => {
         return true
     }
 }
+
+nameInput.addEventListener("input", () => {
+    if (nameError) {
+        nameError.remove()
+    }
+});
+
+emailInput.addEventListener("input", () => {
+    if (emailError) {
+        emailError.remove()
+    }
+});
+
+phoneInput.addEventListener("input", () => {
+    if (phoneError) {
+        phoneError.remove()
+    }
+});
+
+detailsInput.addEventListener("input", () => {
+    if(detailsError){
+        detailsError.remove()
+    }
+});
 
 let showSuccessPopup = () => {
     const popup = document.createElement("div");
