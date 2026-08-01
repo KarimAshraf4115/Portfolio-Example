@@ -100,8 +100,6 @@ window.addEventListener("scrollend", function () {
     }
 })
 
-// SideBar functionalities
-
 themeToggler.addEventListener("click", function () {
     document.querySelector("html").classList.toggle("dark");
     if (document.querySelector("html").classList.contains("dark")) {
@@ -110,7 +108,6 @@ themeToggler.addEventListener("click", function () {
         localStorage.setItem("mode", "light")
     }
 })
-
 function setMode() {
     const mode = localStorage.getItem("mode");
     if (mode === null || mode === "dark") {
@@ -120,6 +117,8 @@ function setMode() {
     }
 }
 
+// SideBar functionalities
+
 settingsToggler.addEventListener("click", function () {
     settingsSidebar.classList.replace("translate-x-full", "translate-x-0");
     settingsToggler.style.right = "20rem"
@@ -128,6 +127,13 @@ settingsToggler.addEventListener("click", function () {
 settingsSidebarClose.addEventListener("click", function () {
     settingsSidebar.classList.replace("translate-x-0", "translate-x-full");
     settingsToggler.style.right = "0rem"
+})
+
+window.addEventListener("click", (e) => {
+    if (e.target !== settingsSidebar && e.target !==settingsToggler &&settingsSidebar.classList.contains("translate-x-0")) {
+        settingsSidebar.classList.replace("translate-x-0", "translate-x-full");
+        settingsToggler.style.right = "0rem"
+    }
 })
 
 for (let i = 0; i < themes.length; i++) {
@@ -476,7 +482,7 @@ phoneInput.addEventListener("input", () => {
 });
 
 detailsInput.addEventListener("input", () => {
-    if(detailsError){
+    if (detailsError) {
         detailsError.remove()
     }
 });
@@ -543,3 +549,4 @@ scrollToTopBtn.addEventListener("click", function () {
         behavior: "smooth"
     });
 });
+
