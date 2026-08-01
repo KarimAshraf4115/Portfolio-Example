@@ -130,11 +130,15 @@ settingsSidebarClose.addEventListener("click", function () {
 })
 
 window.addEventListener("click", (e) => {
-    if (e.target !== settingsSidebar && e.target !==settingsToggler &&settingsSidebar.classList.contains("translate-x-0")) {
+    const isOpen = settingsSidebar.classList.contains("translate-x-0");
+    const clickedInsideSidebar = settingsSidebar.contains(e.target);
+    const clickedToggler = settingsToggler.contains(e.target);
+
+    if (isOpen && !clickedInsideSidebar && !clickedToggler) {
         settingsSidebar.classList.replace("translate-x-0", "translate-x-full");
-        settingsToggler.style.right = "0rem"
+        settingsToggler.style.right = "0rem";
     }
-})
+});
 
 for (let i = 0; i < themes.length; i++) {
     let themeButton = document.createElement("button")
